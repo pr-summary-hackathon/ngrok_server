@@ -17,15 +17,15 @@ app.get('/', (req, res) => {
 
 // POST route to receive data
 app.post('/github-webhook', (req, res) => {
-  console.log('Data received:', req.body);
-
-  // Respond with the received data and a timestamp
-  res.json({
-    success: true,
-    message: 'Data received successfully',
-    timestamp: new Date().toISOString(),
-    receivedData: req.body
-  });
+  const event = req.headers['x-github-event'];
+  // if (event === 'pull_request' && req.body.action === 'opened') {
+  //   // Handle PR creation only
+  //   console.log('PR created:', req.body.pull_request);
+  // }
+  console.log('-------------------');
+  console.log(req.body);
+  console.log('-------------------');
+  res.sendStatus(200);
 });
 
 // Start the server
